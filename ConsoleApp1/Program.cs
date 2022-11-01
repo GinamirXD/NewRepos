@@ -3,7 +3,7 @@ using System.Globalization;
 
 Console.WriteLine("номер 4");
 
-int[] arr = new int[5];
+int[] arr = new int[10];
 Random r = new Random();
 
 for (int i = 0; i < arr.Length; i++)
@@ -18,9 +18,9 @@ bool fl = false;
 
 for (int i = 0; i < arr.Length; i++)
 {
-    for (int j = 2; j <= (int)Math.Sqrt(arr[i]); j++)
+    for (int j = 2; j <= (int)Math.Sqrt(arr[i])+1; j++)
     {
-        if (arr[i] % j == 0)
+        if (arr[i] % j == 0 || arr[i] == 1 || arr[i] == 0)
             break;        
     }
     fl = true;
@@ -31,6 +31,7 @@ if (fl)
 else
     Console.WriteLine("нет простых чисел");
 
+//начало номера 5 ************************************************
 
 Console.WriteLine("номер 5");
 
@@ -66,9 +67,12 @@ if (!flag)
 }
 
 
+//начало номера 6 *************************************
+
+
 Console.WriteLine("номер 6");
 
-int[] mas1 = { 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+int[] mas1 = { 1, 1, 1, 1, 2, 2, 2 };
 
 for (int i = 0; i < mas1.Length; i++)
 {
@@ -77,15 +81,24 @@ for (int i = 0; i < mas1.Length; i++)
 
 bool flag1 = false;
 
+
 for (int i = 0; i < mas1.Length; i++)
 {
-    for (int j = i + 1; j < mas1.Length; j++)
+    for (int j = 0; j < mas1.Length; j++)
     {
-        if (mas1[i] != mas1[j])
+        int count = 1;
+
+        if (i == j)
         {
-            Console.WriteLine("есть уникальные числа");
+            continue;
+        }
+        if (mas1[i] == mas1[j])
+        {
+            count += 1;
+        }
+        if (count == 1)
+        {
             flag1 = true;
-            break;
         }
 
     }
@@ -97,4 +110,8 @@ for (int i = 0; i < mas1.Length; i++)
 if (!flag1)
 {
     Console.WriteLine("нет уникальных чисел");
+}
+else
+{
+    Console.WriteLine("есть уникальные числа");
 }

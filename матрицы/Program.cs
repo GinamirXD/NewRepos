@@ -109,11 +109,11 @@ Random r = new Random();
 
 for (int i = 0; i < m; i++)
     for (int j = 0; j < n; j++)
-        matrA[i, j] = r.Next(100);
+        matrA[i, j] = r.Next(10);
 
 for (int i = 0; i < n; i++)
     for (int j = 0; j < k; j++)
-        matrB[i, j] = r.Next(100);
+        matrB[i, j] = r.Next(10);
 
 for (int i = 0; i < m; i++)
 {
@@ -134,12 +134,15 @@ for (int i = 0; i < n; i++)
 
 for (int i = 0; i < m; i++)
 {
-    for (int j = 0; i < k; j++)
+    for (int j = 0; j < k; j++)
     {
+        int sum = 0;
         for(int s = 0; s < n; s++)
         {
-            matrC = matrA[i, s] + matrB[s,j] ;
+            sum += matrA[i, s] * matrB[s,j] ;
+
         }
+        matrC[i, j] = sum;
     }
 }
 
