@@ -25,9 +25,6 @@
 
             Console.WriteLine(result);
             Console.WriteLine(result2);
-
-            polynomialList1.DeleteOdd();
-            Console.WriteLine(polynomialList1);
         }
     }
 }

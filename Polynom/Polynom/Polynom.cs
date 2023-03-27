@@ -64,15 +64,15 @@ public class Polynomial
             var term = "";
             if (i > 1)
             {
-                term += $"{Coefficients[i]:0.##}x^{i}";
+                term += $"{Coefficients[i]}x^{i}";
             }
             else if (i == 1)
             {
-                term += $"{Coefficients[i]:0.##}x";
+                term += $"{Coefficients[i]}x";
             }   
             else
             {
-                term += $"{Coefficients[i]:0.##}";
+                term += $"{Coefficients[i]}";
             }
             terms.Add(term);
         }
