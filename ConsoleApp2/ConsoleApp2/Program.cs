@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 class Graph
@@ -95,11 +96,17 @@ class Graph
             }
             iterations++;
         }
-        Console.WriteLine($"кол-во итераций - {iterations}");
+        using (StreamWriter writer = new StreamWriter("C:\\Users\\ginam\\source\\repos\\NewRepos\\ConsoleApp2\\ConsoleApp2\\Iterations.txt", true))
+        {
+            writer.WriteLine(iterations);
+        }
     }
    
     public static void Main(String[] args)
     {
+        /*Stopwatch stopWatch = new Stopwatch();
+        stopWatch.Start();
+
         string[] lines = File.ReadAllLines("C:\\Users\\ginam\\source\\repos\\NewRepos\\GraphGenerator\\GraphGenerator\\graph50.txt");
         int numVertices = int.Parse(lines[0]);
         
@@ -122,5 +129,55 @@ class Graph
         }
 
         g.printSCCs();
+
+        stopWatch.Stop();
+        TimeSpan ts = stopWatch.Elapsed;
+        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            ts.Hours, ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10);
+
+        using (StreamWriter writer = new StreamWriter("C:\\Users\\ginam\\source\\repos\\NewRepos\\ConsoleApp2\\ConsoleApp2\\Time.txt"))
+        {
+            writer.WriteLine(elapsedTime);
+        }*/
+        Stopwatch stopWatch = new Stopwatch();
+
+        using (StreamWriter writer = new StreamWriter("C:\\Users\\ginam\\source\\repos\\NewRepos\\ConsoleApp2\\ConsoleApp2\\Time.txt", true))
+
+        for (int j = 1; j < 51; j++)
+        {           
+            stopWatch.Start();
+
+            string[] lines = File.ReadAllLines($"C:\\Users\\ginam\\source\\repos\\NewRepos\\GraphGenerator\\GraphGenerator\\graph{j}.txt");
+            int numVertices = int.Parse(lines[0]);
+
+            Graph g = new Graph(numVertices);
+
+            List<List<int>> adjacencyList = new List<List<int>>();
+
+            for (int i = 1; i < lines.Length; i++)
+            {
+                string[] parts = lines[i].Split(' ');
+                int startVertex = int.Parse(parts[0]);
+                int endVertex = int.Parse(parts[1]);
+                List<int> edge = new List<int> { startVertex, endVertex };
+                adjacencyList.Add(edge);
+            }
+
+            for (int i = 0; i < adjacencyList.Count; i++)
+            {
+                g.addEdge(adjacencyList[i][0], adjacencyList[i][1]);
+            }
+
+            g.printSCCs();
+
+            stopWatch.Stop();
+            TimeSpan ts = stopWatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}",ts.Milliseconds);
+
+            writer.WriteLine(elapsedTime);
+
+            stopWatch.Reset();
+        }
     }
 }
