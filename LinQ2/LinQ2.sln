@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinQ2", "LinQ2\LinQ2.csproj", "{64CDAEF3-D012-4F1F-B610-8362AE5687E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64CDAEF3-D012-4F1F-B610-8362AE5687E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64CDAEF3-D012-4F1F-B610-8362AE5687E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64CDAEF3-D012-4F1F-B610-8362AE5687E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64CDAEF3-D012-4F1F-B610-8362AE5687E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79AEC9E0-1DEC-40F1-8A9B-1D3BBA2C0F3A}
+	EndGlobalSection
+EndGlobal
