@@ -116,33 +116,33 @@
             Console.WriteLine("task 47******");
             Console.WriteLine();
 
-            IEnumerable<string> gasStations1 = new List<string>
-            {
-                "50000 Lukoil ProspektMira 95",
-                "49000 GazpromNeft Lenina 92",
-                "50500 GazpromNeft Pushkina 92",
-                "51000 Rosneft Pushkina 92",
-                "48500 Rosneft ProspektMira 92",
-                "49900 Tatneft Lenina 92",
-                "50100 Tatneft ProspektMira 95",
-                "49700 Tatneft Pushkina 98"
-            };
+            List<GasStation> gasStations1 = new List<GasStation>()
+        {
+            new GasStation() { Price = 500, Company = "Gazprom", Street = "Lenina", GasolineType = 92 },
+            new GasStation() { Price = 510, Company = "Gazprom", Street = "Lenina", GasolineType = 95 },
+            new GasStation() { Price = 520, Company = "Gazprom", Street = "Pobedy", GasolineType = 92 },
+            new GasStation() { Price = 530, Company = "Lukoil", Street = "Pobedy", GasolineType = 98 },
+            new GasStation() { Price = 540, Company = "Lukoil", Street = "Sovetskaya", GasolineType = 92 },
+            new GasStation() { Price = 550, Company = "Lukoil", Street = "Sovetskaya", GasolineType = 95 },
+            new GasStation() { Price = 560, Company = "Rosneft", Street = "Sovetskaya", GasolineType = 92 },
+            new GasStation() { Price = 570, Company = "Rosneft", Street = "Pobedy", GasolineType = 95 },
+            new GasStation() { Price = 580, Company = "Rosneft", Street = "Lenina", GasolineType = 98 }
+        };
 
-            var query1 = (from gs in gasStations1
-                          let fields = gs.Split(' ')
-                          group gs by new { Company = fields[1], Street = fields[2] } into g
-                          where g.Select(x => x.Split(' ')[3]).Distinct().Count() >= 2
-                          orderby g.Key.Company, g.Key.Street
-                          select new { g.Key.Company, g.Key.Street, Count = g.Select(x => x.Split(' ')[3]).Distinct().Count() }).ToList();
+            var _result = gasStations1.GroupBy(
+                    gs => new { gs.Company, gs.Street },
+                    gs => gs.GasolineType)
+                .Select(g => new { g.Key.Company, g.Key.Street, NumGasolineTypes = g.Select(gt => gt).Distinct().Count() })
+                .Where(g => g.NumGasolineTypes >= 2)
+                .OrderBy(g => g.Company)
+                .ThenBy(g => g.Street);
 
-            if (query1.Any())
+            foreach (var group in _result)
             {
-                foreach (var item in query1)
-                {
-                    Console.WriteLine($"{item.Company} {item.Street} {item.Count}");
-                }
+                Console.WriteLine($"{group.Company} {group.Street} {group.NumGasolineTypes}");
             }
-            else
+
+            if (!_result.Any())
             {
                 Console.WriteLine("Нет");
             }
@@ -275,42 +275,28 @@
             Console.WriteLine("Task 87**********");
             Console.WriteLine();
 
-            string[] A1 = {
-            "1990 ул. Ленина 12345",
-            "1985 ул. Пушкина 54321",
-            "1995 ул. Гагарина 67890"
-        };
+            var aList = new List<(int, string, int)> { (1990, "ул. А", 123), (2000, "ул. Б", 456), (1985, "ул. А", 789) };
+            var dList = new List<(int, string, decimal)> { (123, "магазин 1", 100.50m), (456, "магазин 2", 50.75m), (789, "магазин 1", 75.30m) };
+            var eList = new List<(string, int, int)> { ("магазин 1", 123, 10), ("магазин 2", 456, 20), ("магазин 1", 789, 30) };
 
-            string[] D1 = {
-            "001 Магазин А 100",
-            "002 Магазин Б 200",
-            "003 Магазин В 300"
-        };
+            var joinedList = from a1 in aList
+                             join e1 in eList on a1.Item3 equals e1.Item2
+                             join d1 in dList on new { e1.Item1, e1.Item3 } equals new { d1.Item2, d1.Item1 }
+                             select new { a1.Item2, d1.Item2, d1.Item3 };
 
-            string[] E1 = {
-            "Магазин А 12345 001",
-            "Магазин Б 12345 002",
-            "Магазин В 54321 001",
-            "Магазин А 67890 002",
-            "Магазин Б 67890 002"
-        };
+            var grouped = from j in joinedList
+                          group j by new { j.Item1, j.Item2 } into g
+                          select new { g.Key.Item1, g.Key.Item2, Total = g.Sum(x => x.Item3) };
 
-            var query3 = from a in A1
-                        let aParts = a.Split(' ')
-                        join e in E1 on aParts[2] equals e.Split(' ')[1]
-                        let eParts = e.Split(' ')
-                        join d in D1 on new { eParts_0 = eParts[0], eParts_2 = eParts[2] } equals new { eParts_0 = d.Split(' ')[1], eParts_2 = d.Split(' ')[2] } into ed
-                        from d in ed.DefaultIfEmpty()
-                        group d?.Split(' ')[3] ?? "0" by new { aParts_1 = aParts[1], eParts_0 = eParts[0] } into g
-                        orderby g.Key.aParts_1, g.Key.eParts_0
-                        select new { aParts_1 = g.Key.aParts_1, eParts_0 = g.Key.eParts_0, total = g.Sum(s => int.Parse(s)) };
+            var ordered = grouped.OrderBy(g => g.Item1).ThenBy(g => g.Item2);
 
-            foreach (var item in query3)
+            foreach (var g in ordered)
             {
-                Console.WriteLine($"{item.aParts_1}\t{item.eParts_0}\t{item.total}");
+                Console.WriteLine($"{g.Item1} {g.Item2} {g.Total}");
             }
 
-            Console.WriteLine();
+
+           /* Console.WriteLine();
             Console.WriteLine("Task 97**********");
             Console.WriteLine();
 
@@ -360,7 +346,7 @@
             {
                 Console.WriteLine($"{r.Country} {r.CustomerId} {r.TotalPrice}");
             }
-
+           */
         }
     }
 }

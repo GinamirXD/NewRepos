@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VectorTask", "VectorTask\VectorTask.csproj", "{1DF776D7-5893-4DEF-866D-CEB5F1334B2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DF776D7-5893-4DEF-866D-CEB5F1334B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF776D7-5893-4DEF-866D-CEB5F1334B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF776D7-5893-4DEF-866D-CEB5F1334B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF776D7-5893-4DEF-866D-CEB5F1334B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC50607B-607A-48E0-A98E-721539C986CB}
+	EndGlobalSection
+EndGlobal
